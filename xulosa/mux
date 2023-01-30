@@ -1,0 +1,2 @@
+gorilla/mux paketi - requestlar va ularning hendlarni amalga oshiradi.
+params := mux.Vars(r)                 // params o'zgaruvchisiga reqvestdagi parametrni (id) qiymatini map ga o'zlashtiradi

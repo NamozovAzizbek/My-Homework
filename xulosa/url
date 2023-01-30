@@ -1,0 +1,18 @@
+url - websayt manzili.url qismlari
+protocol - kompyuter va browzer suxbatlashish tilining qoidalari. Misol: http yoki https
+domen - har bir sayt uchun yagona nom. Masalan uyi raqamiga o'xshash yogona manzil. www.google.com www-sub domain, google-domain, .com- super domain.
+yo'l - https://github.com/gorilla/mux gorilla/mux - bu yo'l
+
+
+By
+Jessica ScarpatiJohn Burke, Nemertes Research
+What is a URL?
+URL (yagona resurs lokatori) - bu internetda resursni topish uchun ishlatiladigan noyob identifikator. U veb-manzil deb ham ataladi. Url-lar veb-brauzerga resursni qanday va qaerdan olish kerakligini aytib beradigan bir nechta qismlardan iborat-protokol va domen nomi.
+
+Oxirgi foydalanuvchilar URL manzillarini to'g'ridan-to'g'ri brauzerning manzil satriga kiritish yoki veb-sahifada, xatcho'plar ro'yxatida, elektron pochtada yoki boshqa dasturda topilgan giperhavolani bosish orqali foydalanadilar.
+
+
+URL qanday tuzilgan?
+URL-da manbaga kirish uchun zarur bo'lgan protokol nomi, shuningdek resurs nomi mavjud. URL-ning birinchi qismi asosiy kirish vositasi sifatida qanday protokoldan foydalanishni aniqlaydi. Ikkinchi qism resurs joylashgan IP-manzil yoki domen nomini va ehtimol subdomainni aniqlaydi.
+
+URL protokollariga HTTP (gipermatn uzatish protokoli) va HTTPS (HTTP Secure) veb-resurslar uchun, elektron pochta manzillari uchun pochta, FTP fayl uzatish protokoli (FTP) serveridagi fayllar uchun va telnet masofaviy kompyuterlarga kirish uchun seans uchun. Ko'pgina URL protokollaridan keyin ikki nuqta va ikkita oldinga siljish; "pochta orqali" faqat ikki nuqta keladi.

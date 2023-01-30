@@ -1,0 +1,10 @@
+sudo mysql                  		mysql terminalni ochadi.
+create database db_name;    		db yaratadi.
+show databases;             		mavjud dblarni ko'rsatadi.
+use db_name;		    		tanlabga dbga yozadi.
+create table table_name();  		dbda table yaratadi.
+describe table_name;        		table ni maydonlarini chiqaradi.
+insert into table_name value(); 	tablega mulumot qo'shadi.
+select * from table_name;		table malumotlarni commendlinga chiqaradi.
+sudo service mysql stop 	
+sudo service mysql start 	

@@ -1,0 +1,244 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+func main(){
+	jsonString := `
+	{
+		"data":{
+			"username":"Azizbek",
+			"password":"1212232",
+			"id":"1"
+		}
+	}
+	`
+
+	var m map[string]map[string]interface{}
+	_ = json.Unmarshal([]byte(jsonString), &m)
+	fmt.Println(jsonString, m)
+
+
+	b, _ := json.Marshal(m)
+	fmt.Println(string(b))
+}
+ 
+
+package main
+
+import (
+    "encoding/json"
+    "fmt"
+    "os"
+)
+
+type response1 struct {     	    // json farmatigaa o'tgandagi ko'rinish{"Page":1,"Fruits":["apple","peach","pear"]}
+    Page   int
+    Fruits []string
+}
+
+type response2 struct {
+    Page   int      `json:"page"`   // json farmatigaa o'tgandagi ko'rinish{"page":1,"fruits":["apple","peach","pear"]}
+    Fruits []string `json:"fruits"` // farq response1 da Page va Fruits maydonlari jsonga o'tganda katta harfligich qolgan.respons2 da esa 
+}				    // kichik
+
+func main() {
+
+    bolB, _ := json.Marshal(true)
+    fmt.Println(string(bolB))
+
+    intB, _ := json.Marshal(1)
+    fmt.Println(string(intB))
+
+    fltB, _ := json.Marshal(2.34)
+    fmt.Println(string(fltB))
+
+    strB, _ := json.Marshal("gopher")
+    fmt.Println(string(strB))
+
+    slcD := []string{"apple", "peach", "pear"}
+    slcB, _ := json.Marshal(slcD)
+    fmt.Println(string(slcB))
+
+    mapD := map[string]int{"apple": 5, "lettuce": 7}
+    mapB, _ := json.Marshal(mapD)
+    fmt.Println(string(mapB))
+
+    res1D := &response1{
+        Page:   1,
+        Fruits: []string{"apple", "peach", "pear"}}
+    res1B, _ := json.Marshal(res1D)
+    fmt.Println(string(res1B))
+
+    res2D := &response2{
+        Page:   1,
+        Fruits: []string{"apple", "peach", "pear"}}
+    res2B, _ := json.Marshal(res2D)
+    fmt.Println(string(res2B))
+
+    byt := []byte(`{"num":6.13,"strs":["a","b"]}`) // byt bayt tipidagi o'zgaruvchi
+
+    var dat map[string]interface{}
+
+    if err := json.Unmarshal(byt, &dat); err != nil {  // dat o'zgaruvchisiga byt o'zgaruvchisi qiymati json farmatida berildi.
+        panic(err)
+    }
+    fmt.Println(dat)					// map[num:6.13 strs:[a b]]
+
+    um := dat["num"].(float64)				// um o'zgaruvchisiga json farmatidagi dat o'zgaruvchisidagi num o'zgaruvhisinig 
+    fmt.Println(um)					// qiymati o'zlashtiriladi. um = 6.13
+
+    strs := dat["strs"].([]interface{})
+    str1 := strs[0].(string)
+    fmt.Println(str1)
+
+    str := `{"page": 1, "fruits": ["apple", "peach"]}`
+    res := response2{}
+    json.Unmarshal([]byte(str), &res)
+    fmt.Println(res)
+    fmt.Println(res.Fruits[0])
+
+    enc := json.NewEncoder(os.Stdout)			// bu qatorda yangi enc nomli json farmatiga o'tuvchi o'zgaruvchi oldik.
+    d := map[string]int{"apple": 5, "lettuce": 7}	// json.NewEncoder(os.Stdout) funksiyadagi os.Stdout o'rniga http responsni yozsa 
+    enc.Encode(d)					// bo'ladi. enc.Encode(d) bu funk d o'zgaruvchisini json ga farmatladi.
+}
+//KONSOLDAGI NATIJALAR 
+->
+true
+1
+2.34
+"gopher"
+["apple","peach","pear"]
+{"apple":5,"lettuce":7}
+{"Page":1,"Fruits":["apple","peach","pear"]}
+{"page":1,"fruits":["apple","peach","pear"]}
+map[num:6.13 strs:[a b]]
+6.13
+a
+{1 [apple peach]}
+apple
+{"apple":5,"lettuce":7}
+<-.
+
+
+
+
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type Person struct {
+	First string
+	Last string
+	}
+	func main() {
+		/* This will marshal the JSON into []bytes */
+	
+		p1 := Person{"alice", "bob"}
+								// Encoding json
+		bs, _ := json.Marshal(p1)			// stringdan baytga o'tadi.
+		fmt.Println(string(bs))
+	
+		/* This will unmarshal the JSON from []bytes */
+	
+		var p2 Person
+		bs = []byte(`{"First":"alice","Last":"bob"}`)
+								//Decoding json
+		json.Unmarshal(bs, &p2)				// unmarshal json tipdagi stringni go o'zgaruvchisiga o'zlashtiradi.
+		fmt.Println(p2)
+	
+	}
+	
+	
+	
+func Unmarshal(data []byte, v interface{}) error
+
+func Marshal(v interface{}) ([]byte, error)
+
+b, _ := json.Marshal(m)						Marshal funksiyasi ixtiyoriy tipdagi o'zgruvchini baytga almashtiradi.
+
+NewDecoder va NewEncoder funksiyalari io.Reader va io.Writer interfeys turlarini qamrab oladi.
+
+func NewDecoder(r io.Reader) *Decoder
+func NewEncoder(w io.Writer) *Encoder
+
+
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"io"
+	"log"
+	"strings"
+)
+
+func main() {
+	const jsonStream = `
+	{"Name": "Ed", "Text": "Knock knock."}                   // json malumot jsonString o'zgaruvchisiga string shaklida berildi
+	{"Name": "Sam", "Text": "Who's there?"}
+	{"Name": "Ed", "Text": "Go fmt."}
+	{"Name": "Sam", "Text": "Go fmt who?"}
+	{"Name": "Ed", "Text": "Go fmt yourself!"}
+`								   // structdagi Ism ga jsondagi Name o'zlashtiriladi.
+	type Message struct {					   // agar struct json o'qish uchun bo'lsa maydonlari katt harflar bilan
+		Ism string `json:"Name"`			   // bo'lishi kerak. struct json malumotni o'qish uchun kerak
+		Matn string `json:"Text"`                          // agar maydonlar kichik harflarda bo'ladigan bo'lsa json malumotlar
+	}							   // o'qilmay qoladi.
+	dec := json.NewDecoder(strings.NewReader(jsonStream))	   
+								   // decoder json ni o'qiysdi
+	for {
+		var m Message
+		if err := dec.Decode(&m); err == io.EOF {	   // decode jsondagi malumotni go a'zgaruvchilarga o'zlashtiradi
+			break
+		} else if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Printf("%s: %s\n", m.Name, m.Text)
+	}
+}
+
+func NewEncoder(w io.Writer) *Encoder
+NewEncoder returns a new encoder that writes to w.
+
+func (*Encoder) Encode   						
+func (enc *Encoder) Encode(v any) error
+Encode writes the JSON encoding of v to the stream, followed by a newline character.
+
+See the documentation for Marshal for details about the conversion of Go values to JSON.
+
+mux.Vars(r)                                                                                  // reqvestdagi o'zgaruvchini o'zlashtiradi.
+
+fmt.Fprint(w, movies) 							// moviesni responsga yozadi lekin text shaklida
+json.NewEncoder(w).Encode(movies) 					// moviesni responsga yozadi json shaklida.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
