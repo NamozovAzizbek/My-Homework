@@ -1,0 +1,4 @@
+1.? (w http.ResponseWriter, r * http.Request)      nimaga requestga * qoyiladi.
+2.? w.Header().Set("Content-Type","aplicition/json") 
+3.? mux.Vars(r) 
+4.? nimaga web browzerda faqat get mothodi ishlamoqda. 
