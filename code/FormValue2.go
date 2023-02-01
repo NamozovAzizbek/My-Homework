@@ -31,13 +31,15 @@ import (
 
 func YourHandler(w http.ResponseWriter, r *http.Request) {
   r.ParseForm()
-  log.Println("one = " + r.FormValue("one"))
-  log.Println("two = " + r.FormValue("two"))
-  fmt.Fprintf(w, "Gorilla!\n")
+//   log.Println("one = " + r.FormValue("one"))
+//   log.Println("two = " + r.FormValue("two"))
+o := r.FormValue("one")
+t := r.FormValue("two")
+  fmt.Fprintf(w, "%v Gorilla! %v \n", o, t)
 }
 
 func Value2() {
   r := mux.NewRouter()
-  r.HandleFunc("/", YourHandler).Methods("POST")
+  r.HandleFunc("/form", YourHandler).Methods("POST")
   log.Fatal(http.ListenAndServe(":8000", r))
 }

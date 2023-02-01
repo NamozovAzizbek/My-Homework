@@ -31,7 +31,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request){
 	fmt.Fprintf(w, "hello")
 }
 func formHandler(w http.ResponseWriter, r *http.Request){
-	if err := r.ParseForm(); err != nil{					// post, put, patch requestlari hamda requestning tanasini o'qish uchun
+	if err := r.ParseForm(); err != nil{					// post, put, 	patch requestlari hamda requestning tanasini o'qish uchun
 		fmt.Fprintf(w, "Parseform() err: %v", err)
 		return
 	}
