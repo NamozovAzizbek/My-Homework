@@ -62,3 +62,25 @@ func about(w http.ResponseWriter, r *http.Request) {
 // funksiyaga brazerdan murojat qilinganda parametrlardan keladigan qiymatlarni o'zlashtirmaydi. Parametrlarga berilgan qiymatni olishni terminalda <curl 'http://localhost:3333?first=1&second=2'> kodni yozish orqali olish mumkin
 
 // bravzerda parametrlarga berilgan qiymatlarni olish uchun <http://localhost:3333/?first=1&second=2> kod yoziladi. farqi bunda port raqimidan keyin </> slesh belgisin bor.
+//2-usul
+/*package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+
+	"github.com/gorilla/mux"
+)
+func Value2(){
+	r := mux.NewRouter()
+	r.HandleFunc("/", han).Methods("POST")
+	log.Fatal(http.ListenAndServe(":8000", r))
+}
+func han(w http.ResponseWriter, r *http.Request){
+	r.ParseForm()
+	a := r.FormValue("one")
+	b :=r.FormValue("two")
+	log.Println(a, b)
+	fmt.Fprint(w, "Gorilla !\n")
+}*/
