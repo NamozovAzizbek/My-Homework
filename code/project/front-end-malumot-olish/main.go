@@ -29,7 +29,9 @@ func main() {
 }
 func getHello(w http.ResponseWriter, r *http.Request) {
 	var name string
+	r.ParseForm()
 	name = r.PostFormValue("myName") // name o'zgaruvchisiga requst body sida myName ga berilgan qiymatni o'zlashtiradi bu kode bilan faqat terminal orqali qiymat bera oldim <curl -X POST -F 'myName=Azizbek' 'http://localhost:3333/hello'>
+	name = r.FormValue("myName")
 	a := json.NewDecoder(r.Body).Decode(&name) //bu kode orqali postmandan qiymat olib bildim M: bodiyga yozdim  "azizbek"
 	if a != nil{
 		fmt.Fprint(w, a)
