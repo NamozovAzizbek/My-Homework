@@ -28,9 +28,17 @@ func main() {
 	}
 }
 func getHello(w http.ResponseWriter, r *http.Request) {
-	name := r.PostFormValue("myName") // name o'zgaruvchisiga requst body sida myName ga berilgan qiymatni o'zlashtiradi
+	var name string
+	name = r.PostFormValue("myName") // name o'zgaruvchisiga requst body sida myName ga berilgan qiymatni o'zlashtiradi bu kode bilan faqat terminal orqali qiymat bera oldim <curl -X POST -F 'myName=Azizbek' 'http://localhost:3333/hello'>
+	a := json.NewDecoder(r.Body).Decode(&name) //bu kode orqali postmandan qiymat olib bildim M: bodiyga yozdim  "azizbek"
+	if a != nil{
+		fmt.Fprint(w, a)
+	}
+	if name == "" {
+		name = "HTTP"
+	}
 	json.NewEncoder(w).Encode(fmt.Sprintf("hello %v", name)) // 32, 33, 34 qatorlar ekranga chiqarish usullari
 	io.WriteString(w, fmt.Sprintf("hello %v \n", name))
 	fmt.Fprintf(w, "hello %v\n", name)
 }
-// bu kodga faqat terminalda murojat qilib bildim postman va veb bravzerdan qiymani kiritib bilmadim  <curl -X POST -F 'myName=Azizbek' 'http://localhost:3333/hello'>
+// manimcha bu kodni veb bravzer orqali kiritish uchun front end kerak
