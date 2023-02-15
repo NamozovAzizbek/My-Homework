@@ -39,7 +39,7 @@
 // }
 
 // func getRoot(w http.ResponseWriter, r *http.Request){
-// 	body, err := io.ReadAll(r.Body) // faylning tanasi o'qilmoqda
+// 	body, err := io.ReadAll(r.Body) // request tanasi o'qilmoqda
 // 	x := json.NewDecoder(r.Body)
 // 	if err != nil {
 // 		fmt.Printf("Could not read %s\n", err)
@@ -97,7 +97,7 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 	fir := r.URL.Query().Get("first")    // firdegan o'zgaruvchiga queryda first=qiymat berilgandagi qiymatni o'zlashtiradi.
 	hasSecond := r.URL.Query().Has("second")
 	second := r.URL.Query().Get("second")
-	body, err := io.ReadAll(r.Body) // faylning tanasi o'qilmoqda
+	body, err := io.ReadAll(r.Body) // requst tanasi o'qilmoqda// so'rov postmanda bo'ladigan bo'lsa http://localhost:3333?first=1&second=3 yoziladi va pastdagi body qismiga o'tib malumot kiritiladi 101 qatordagi kodga ham taluqli
 	x := json.NewDecoder(r.Body)
 	if err != nil {
 		fmt.Printf("Could not read %s\n", err)
@@ -117,4 +117,3 @@ func about(w http.ResponseWriter, r *http.Request) {
 
 //so'rov agar terminalda bo';adigan bo'lsa curl -X POST -d 'This is the body' 'http://localhost:3333?first=1&second='
 
-// so'rov postmanda bo'ladigan bo'lsa http://localhost:3333?first=1&second=3 yoziladi va pastdagi body qismiga o'tib malumot kiritiladi

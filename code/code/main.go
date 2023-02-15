@@ -1,7 +1,5 @@
 package main
 
-
-
-func main(){
-	Func()
+func main() {
+	Trim()
 }

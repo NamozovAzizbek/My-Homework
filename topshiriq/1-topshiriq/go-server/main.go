@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	
 	"log"
 	"net/http"
 )
@@ -36,10 +37,11 @@ func formHandler(w http.ResponseWriter, r *http.Request){
 		return
 	}
 	fmt.Fprintf(w, "POST request successful \n")
-	name := r.FormValue("name")
-	address := r.FormValue("address")
-	fmt.Fprintf(w, "Name = %s \n", name)
-	fmt.Fprintf(w, "Address = %s", address)
+	n := r.FormValue("name")
+	a := r.FormValue("address")
+	fmt.Println(r)
+	fmt.Fprintf(w, "Name = %s \n", n)
+	fmt.Fprintf(w, "Address = %s", a)
 
 
 }

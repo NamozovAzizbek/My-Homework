@@ -1,0 +1,44 @@
+biz go dasturlash tilida boshqa dasturlash tillarida mavjud try/catch lardan foydalanilmaydi. 
+biz golang dasturlash tilinda 
+New() func
+Errorf() func
+funksiyalardan foydalanamiz.
+
+golang da foydalanuvchi error lari.
+In Go, we can create custom errors by implementing an error interface in a struct.
+
+type error interface {
+  Error() string
+} 
+
+
+
+package main
+
+import "fmt"
+
+type greater interface {
+	great(string) string
+}
+
+type uzb struct{}
+type eng struct{}
+
+func (u *uzb) great(name string) string {
+	return fmt.Sprintf("Salom %s", name)
+}
+func (e *eng) great(name string) string {
+	return fmt.Sprintf("Hello %s", name)
+}
+
+func sayHello (g greater, name string){
+	fmt.Print(g.great(name))
+}
+
+
+
+func main() {
+sayHello(&uzb{}, "azizbek")
+sayHello(&eng{}, "azizbek")
+
+}

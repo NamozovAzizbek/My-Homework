@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -18,6 +19,9 @@ func main() {
 
 		mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 			fmt.Printf("server: %s\n", r.Method)
+			for headerName, headerValue := range r.Header {
+				fmt.Printf("\t%s = %s\n", headerName, strings.Join(headerValue, ", "))
+			}
 			fmt.Fprintf(w, `{"message":"hello!"}`)
 		})
 		server := &http.Server{
@@ -38,7 +42,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	res, err := http.DefaultClient.Do(req)// http.DefaultClient http.get bilan bir xilda.
+	res, err := http.DefaultClient.Do(req)// http.DefaultClient.Do http.get bilan bir xilda.
 	if err != nil {
 		fmt.Printf("client: error making http request: %s\n", err)
 		os.Exit(1)

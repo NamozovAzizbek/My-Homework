@@ -71,7 +71,7 @@ func main() {
 		cancelCtx()
 	}()
 
-	go func() {
+	//go func() {
 		err := serverTwo.ListenAndServe()
 		if errors.Is(err, http.ErrServerClosed) {
 			fmt.Println("Server closed !")
@@ -80,6 +80,6 @@ func main() {
 			os.Exit(1)
 		}
 		cancelCtx()
-	}()
+	//}()
 	<-ctx.Done()
 }
