@@ -1,0 +1,10 @@
+go 1.20
+
+use (
+	./code
+	./db
+	./error-handler
+	./example
+	./go/src/go-todo
+
+)
